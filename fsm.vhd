@@ -13,7 +13,7 @@ Port (
         clk  : in std_logic;
         reset  : in std_logic;
         x_out: out std_logic;
-        led_out: out std_logic_vector(3 downto 0)
+        led_out: out std_logic_vector(5 downto 0)
              );
 end fsm;
 
@@ -31,32 +31,67 @@ begin
             when A_state =>
                led_out(0)<='1';
                led_out(1)<='0';
+               led_out(2)<='0';
+               led_out(3)<='0';
+               led_out(4)<='0';
+               led_out(5)<='0';
                x_out <= a_in;
+               if(a_in='1')then
+               led_out(0)<='0';
+               led_out(1)<='0';
+               led_out(2)<='1';
+               led_out(3)<='0';
+               led_out(4)<='0';
+               led_out(5)<='0';
+               end if;
                 if(d_in='1')then 
-
-                 led_out(2)<='1';
+                 led_out(0)<='0';
+                 led_out(1)<='0';
+                 led_out(2)<='0';
                  led_out(3)<='0';
+                 led_out(4)<='1';
+                 led_out(5)<='0';
                  state<=B_state;
                 else
-
+                 led_out(0)<='0';
+                 led_out(1)<='0';
                  led_out(2)<='0';
-                 led_out(3)<='1';
-                 state<=A_state;
+                 led_out(3)<='0';
+                 led_out(4)<='0';
+                 led_out(5)<='1';
+                    state<=A_state;
                 end if;
             when B_state => 
                  led_out(0)<='0';
                  led_out(1)<='1';
-                 x_out <=b_in;
-           
-                if(d_in='1') then
-
-                 led_out(2)<='1';
+                 led_out(2)<='0';
                  led_out(3)<='0';
-                 state<=A_state;
-                else 
-
+                 led_out(4)<='0';
+                 led_out(5)<='0';
+                 x_out <=b_in;
+               if(b_in='1')then 
+                 led_out(0)<='0';
+                 led_out(1)<='0';
                  led_out(2)<='0';
                  led_out(3)<='1';
+                 led_out(4)<='0';
+                 led_out(5)<='0';
+               end if;
+                if(d_in='1') then
+                 led_out(0)<='0';
+                 led_out(1)<='0';
+                 led_out(2)<='0';
+                 led_out(3)<='0';
+                 led_out(4)<='1';
+                 led_out(5)<='0';
+                 state<=A_state;
+                else 
+                 led_out(0)<='0';
+                 led_out(1)<='0';
+                 led_out(2)<='0';
+                 led_out(3)<='0';
+                 led_out(4)<='0';
+                 led_out(5)<='1';
                  state<=B_state;
                 end if;
             end case;

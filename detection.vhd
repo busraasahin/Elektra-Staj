@@ -9,7 +9,7 @@ entity detection is
 Port (
 
 clk : in std_logic;
-reset : in std_logic;
+rst : in std_logic;
 datain : in std_logic;
 dataout : out std_logic
  );
@@ -19,9 +19,9 @@ architecture Behavioral of detection is
 type durum is (s1, s2, s3, s4, s5, s6, s7, s8);
 signal state : durum;
 begin
-process (clk,reset) 
+process (clk,rst) 
 begin 
-if(reset='1')then
+if(rst='1')then
     state<= s1;
     dataout<='0';
 elsif(rising_edge(clk)) then --1101011
